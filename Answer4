@@ -1,5 +1,6 @@
-The function outputs 10. This is because the array of functions should not take a hard coded value in the function. 
-This is what the code should look like :
+The function outputs 10. This is because the array of functions should not take a hard coded value in the parameter list. 
+Instead, the function should have a parameter list much like when you type out a function header for any other type of function.
+This is what the code should look like below. 
 
 function printUpTo(count) {
 	var delegates = new Array();
