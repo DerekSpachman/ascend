@@ -1,0 +1,17 @@
+.headerAndFooter {
+  border: 2px solid lightgray;
+  padding: 5px;
+	background-color: lightgray;
+	--color:  lightgray		--I would ask in a real scenario which one you wanted, 
+					--but this is just a practice problem.
+}
+
+.headerAndFooter, .headerRow {
+  	border-top-right-radius: 25px;
+  	border-top-left-radius: 25px;
+}
+
+.headerAndFooter, .footerRow {
+  	border-bottom-right-radius: 25px;
+  	border-bottom-left-radius: 25px;
+}
