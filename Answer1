@@ -1,0 +1,63 @@
+using System;
+using System.Collections.Generic;
+
+public class Node<T> {
+    public T Value { get; set; }
+    public Node<T> Left { get; set; }
+    public Node<T> Right { get; set; }
+
+    public Node(T val) {
+        this.Value = val;
+        Left = null;
+        Right = null;
+    }
+}
+
+public class Test  {
+    public static Node<string> root;
+
+    static void Main(string[] args)
+    {
+        Test test = new Test();
+        root = new Node<string>("1");
+        Node<string> p = root;
+        p.Left = new Node<string>("2");
+        p.Right = new Node<string>("3");
+        p = p.Left;
+        p.Left = new Node<string>("4");
+        p = root.Right;
+        p.Left = new Node<string>("5");
+
+        System.Console.WriteLine(test.TraceSearch("5"));
+    }
+
+    //dfs iterative approach
+    string TraceSearch(string searchKey)  {
+        //special case
+        if(root == null)
+            return "Not Found";
+        
+        Stack<Node<string>> stack = new Stack<Node<string>>(); //to navigate through node tree
+        stack.Push(root);
+        Node<string> p = root;
+        while(stack.Count > 0) {
+            //go to left most node
+            while(p != null) {
+                stack.Push(p);
+                if(p.Value.Equals(searchKey))
+                    return stringifyStack(stack);
+                p = p.Left;
+            }
+            p = stack.Pop();
+            p = p.Right;
+        }
+        return "Not Found";
+    }
+
+    private string stringifyStack(Stack<Node<string>> searchPath) {
+        string path = "";
+        while(searchPath.Count > 0)
+            path += searchPath.Pop().Value + "\n";
+        return path.TrimEnd('\n');
+    }
+}
