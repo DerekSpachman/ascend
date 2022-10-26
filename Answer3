@@ -1,0 +1,74 @@
+3. A. This code seems to find the min value using a calculation from a given array and point. 
+  This value and the smaller neighboring element based on the same calculation are returned. This would be the smallest point.
+3. B. main points to refactor are: 
+	* Declare variables at beginning of chunks they are used at.
+	* Cut down on  variables used.
+	* Give more meaningful names.
+	* As mentioned in the comments, I would also reach out about  arrPoints
+
+function GetSmallestPoint(myArray, point) {
+   var returnVal = [];
+   // Special cases
+   if (myArray.length == 0) {
+      return null;
+   }
+   else if (myArray.length == 1) {
+      returnVal.push(myArray[0]);
+      return returnVal;
+   }
+
+   var index;
+   var value;
+   var minValue = Infinity;
+   for (var i = 0; i < myArray.length; i++) {
+      value = myArray[i].x – point.x * 2 + myArray[i].y – point.y * 2;
+      if (value < minValue) {
+         minValue = value;
+         index = i;
+      }
+   }
+   
+   var value2;
+   if (index == 0) {
+      returnVal.push(myArray[0]);
+      returnVal.push(myArray[1]);
+   }
+   else if (index == myArray.length - 1) {
+      returnVal.push(myArray[myArray.length - 2]);
+      returnVal.push(myArray[myArray.length - 1]);
+   }
+   else {
+      value = myArray[index - 1].x – point.x * 2 
+		+ myArray[index - 1].y – point.y * 2;
+      value2 = myArray[index + 1].x – point.x * 2 
+		+ myArray[index + 1].y – point.y * 2;
+
+	   // I am not sure what arrPoints is. I wont bug you over a practice
+	   //problem, but in a real scenario I would reach out to find out 
+	   //what  arrPoints is supposed to be. I will assume it should 
+	   //be  myArray.
+      if (value < value2) {
+         returnVal.push(myArray[index - 1]);
+         returnVal.push(myArray[index]);
+      }
+      else {
+         returnVal.push(myArray[index]);
+         returnVal.push(myArray[index + 1]);
+      }
+   }
+
+   return returnVal;
+}
+   
+   
+3. C.
+  general case:
+    myArray = {1, 2, 3, 4, 5}, Point {x = 1, y = 1}; //index = first entry
+    myArray = {5, 4, 3, 2, 1}, Point {x = 1, y = 1}; //index = last entry
+    myArray = {3, 2, 1, 2, 3}, Point {x = 1, y = 1}; //index = middle, tests nested else
+    myArray = {3, 2, 1, 4, 3}, Point {x = 1, y = 1}; //index = middle, tests nested if
+    myArray = {3, 5, 1, 4, 3}, Point {x = 1, y = 1}; //index = middle, tests nested if 
+  special cases:
+    myArray = {}, Point {x = 1, y = 1}; //myArray.length = 0
+    myArray = {1}, Point {x = 1, y = 1}; //myArray.length = 1
+  In a real senario I would ask someone if there should be checks for point.
